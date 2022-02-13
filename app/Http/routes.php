@@ -27,9 +27,8 @@ Route::get('/tasks/create', function () {
 })->name('tasks.create');
 
 Route::post('/tasks', function (\Illuminate\Http\Request $request) {
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
-    ]);
+    $validator = Validator::make($request->all(),
+        ['name' => 'required|max:255']);
 
     if($validator->fails()) {
         return redirect(route('tasks.create'))
@@ -44,6 +43,12 @@ Route::post('/tasks', function (\Illuminate\Http\Request $request) {
     return redirect(route('tasks.index'));
 })->name('tasks.store');
 
-Route::delete('/tasks/{task}', function () {
-    echo 'delete task';
+//Route::delete('/tasks/{task}', function () {
+//    echo 'delete task';
+//});
+
+Route::delete('/tasks/{task}', function (\App\Models\Task $task) {
+    $task->delete();
+
+    return redirect(route('tasks.index'));
 });
