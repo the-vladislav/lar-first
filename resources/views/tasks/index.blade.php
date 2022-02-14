@@ -30,15 +30,31 @@
 
                             <!-- Кнопка Удалить -->
                             <td>
-                                <form action="{{ url('tasks/'.$task->id) }}" method="POST">
+                                <form method="POST" action="{{ route('tasks.delete', $task->id) }}" >
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
-                                    <button type="submit" class="btn btn-danger">
+                                    <button class="btn btn-danger">
                                         <i class="fa fa-trash"></i> Удалить
                                     </button>
                                 </form>
                             </td>
+
+                            ///////////////////////////
+
+                            <td>
+                                <form method="POST" action="{{ route('tasks.edit', $task->id) }}" >
+                                    {{ csrf_field() }}
+                                    {{ method_field('GET') }}
+
+                                    <button class="btn btn-warning">
+                                        <i class="fa fa-trash"></i>Редактировать
+                                    </button>
+                                </form>
+                            </td>
+
+                            /////////////////////////////
+
                         </tr>
                     @endforeach
                     </tbody>
